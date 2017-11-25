@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pb;
+
+import "person.proto";
+
+message IdRequest{
+    int64 id = 1;
+}
+
+message IdListRequest{
+    repeated int64 id = 1;
+}
+
+message NameListRequest{
+    repeated string perfix = 1;
+}
+
+service PersonService {
+    rpc Get (IdRequest) returns (Person);
+    rpc Delete (IdRequest) returns (Person);
+    rpc Add (Person) returns (Person);
+    rpc Update(Person) returns (Person);
+    rpc List (IdListRequest) returns (PersonList);
+    rpc SearchByName (NameListRequest) returns (PersonList);
+}
+

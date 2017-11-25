@@ -1,8 +1,10 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"seed/config"
+	"seed/service"
 )
 
 var (
@@ -13,5 +15,9 @@ var (
 )
 
 func main() {
+	// confFile := flag.String("config", "seed.conf", "配置文件路径")
+	ptrPort := flag.String("port", "1120", "监听端口")
+	flag.Parse()
+	service.Start(*ptrPort)
 	fmt.Println("GitHash", GitHash, "CompileTime", CompileTime, "ConfigVar", config.ConfigArg)
 }

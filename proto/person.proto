@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+
+import "story.proto";
+
+message Person {
+    // 注释范例
+    int64 id = 1;
+    string name = 2;
+    bool sex = 3;
+    int32 age = 4;
+    float money = 5;
+    bytes attach = 6;
+    int64 joinTime = 7;
+    double rate = 8;
+    repeated Story storys = 9;
+    string headImgUrl = 10;
+    map<int32, string> friends = 11;
+}
+
+message PersonList {
+    repeated Person items = 1;
+}
