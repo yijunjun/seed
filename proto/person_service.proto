@@ -4,6 +4,8 @@ package pb;
 
 import "person.proto";
 
+import "google/api/annotations.proto";
+
 message IdRequest{
     int64 id = 1;
 }
@@ -17,7 +19,13 @@ message NameListRequest{
 }
 
 service PersonService {
-    rpc Get (IdRequest) returns (Person);
+    // rpc Get (IdRequest) returns (Person);
+    rpc Get(IdRequest) returns (Person) {
+        option (google.api.http) = {
+            post: "/v1/example/get"
+            body: "*"
+        };
+    }
     rpc Delete (IdRequest) returns (Person);
     rpc Add (Person) returns (Person);
     rpc Update(Person) returns (Person);

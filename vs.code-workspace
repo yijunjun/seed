@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "/Users/yijunjun/gopath/src/ipreset"
 		}
 	]
 }
