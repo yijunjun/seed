@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "person_service.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/example/get": {
+      "post": {
+        "summary": "rpc Get (IdRequest) returns (Person);",
+        "operationId": "Get",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/pbPerson"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbIdRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PersonService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "pbIdRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "pbPerson": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "注释范例"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "money": {
+          "type": "number",
+          "format": "float"
+        },
+        "attach": {
+          "type": "string",
+          "format": "byte"
+        },
+        "joinTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "rate": {
+          "type": "number",
+          "format": "double"
+        },
+        "storys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbStory"
+          }
+        },
+        "headImgUrl": {
+          "type": "string"
+        },
+        "friends": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pbPersonList": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbPerson"
+          }
+        }
+      }
+    },
+    "pbStory": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "end": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "doc": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

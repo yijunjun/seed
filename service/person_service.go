@@ -43,7 +43,10 @@ func (ps *PersonService) SearchByName(context.Context, *pb.NameListRequest) (*pb
 }
 
 func init() {
-	regService(func(s *grpc.Server) {
-		pb.RegisterPersonServiceServer(s, &PersonService{})
+	reg(&service{
+		Grpc: func(s *grpc.Server) {
+			pb.RegisterPersonServiceServer(s, &PersonService{})
+		},
+		Restful: pb.RegisterPersonServiceHandlerFromEndpoint,
 	})
 }

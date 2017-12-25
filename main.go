@@ -3,8 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
+	"os/signal"
 	"seed/config"
 	"seed/service"
+	"syscall"
 )
 
 var (
@@ -16,8 +19,28 @@ var (
 
 func main() {
 	// confFile := flag.String("config", "seed.conf", "配置文件路径")
-	ptrPort := flag.String("port", "1120", "监听端口")
+	ptrGrpcPort := flag.String("grpc", "8820", "GRPC端口")
+	ptrRestfulPort := flag.String("restful", "8821", "RESTFUL端口")
 	flag.Parse()
-	service.Start(*ptrPort)
-	fmt.Println("GitHash", GitHash, "CompileTime", CompileTime, "ConfigVar", config.ConfigArg)
+
+	service.Start(service.Option{
+		GrpcPort:    *ptrGrpcPort,
+		RestfulPort: *ptrRestfulPort,
+	})
+
+	fmt.Println(
+		"GitHash", GitHash,
+		"CompileTime", CompileTime,
+		"ConfigVar", config.ConfigArg,
+		"GrpcPort", *ptrRestfulPort,
+		"RestfulPort", *ptrRestfulPort,
+	)
+
+	signalChan := make(chan os.Signal, 1)
+
+	signal.Notify(signalChan, os.Interrupt, os.Kill, syscall.SIGTERM)
+
+	s := <-signalChan
+
+	fmt.Println("recvice signal:" + s.String())
 }
